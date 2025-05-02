@@ -9,11 +9,18 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // Importing routes
-import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/user.route.js";
 
-app.use(authRoutes);
+app.use("/user",userRoutes);
+
+
+// Error handling middleware
+import errorHandler from "./middlewares/errorHandler.js";
+app.use(errorHandler);
 
 export default app;
 

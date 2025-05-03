@@ -1,20 +1,33 @@
 import { User } from '../models/user.model.js';
+import { BlacklistToken } from '../models/blacklistToken.model.js';
 
 const createUser = async ({
-    phone,
     email,
+    password,
+    phone,
     name,
     role,
 }) => {
-    if (!phone) {
-        throw new Error('Phone number is required');
+    if (!email){
+        throw new Error('Email is required');
+    };
+    if (!password) {
+        throw new Error('Password is required');
     }
+
+    const existingUser = await User.findOne({ email, role });
+    if (existingUser) {
+        throw new Error('This email is already registered as a ' + role);
+    }
+
+    const hashedPassword = await User.hashPassword(password);
 
     const user = new User({
         phone,
         email,
         name,
         role,
+        password: hashedPassword,
     });
     await user.save();
 
@@ -23,30 +36,37 @@ const createUser = async ({
 };
 
 
-const findUserWithPhone = async ({
-    phone,
-    role,
+const findUser = async ({
+    email,
+    role
 }) => {
-    if (!phone && !email) {
-        throw new Error('Phone number or email is required');
+    if (!email) {
+        throw new Error('Email is required');
     }
     if (!role) {
         throw new Error('Role is required');
     }
-
-    const user = await User.findOne({ phone, role });
+    
+    const user = await User.findOne({ email, role });
     if (!user) {
-        throw new Error('User not found');
+        throw new Error(`${role} not found with this email`);
     }
 
     return user;
 }
 
+const blacklistToken= async (token) => {
+    const blacklistedToken = new BlacklistToken({ token });
+    await blacklistedToken.save();
+}
 
-//Exporting the service functions
+
+
+// Exporting the service functions
 const userServices = {
     createUser,
-    findUserWithPhone,
+    findUser,
+    blacklistToken,
 };
 export default userServices;
 

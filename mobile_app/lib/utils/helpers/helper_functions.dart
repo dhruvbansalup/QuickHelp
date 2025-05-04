@@ -1,0 +1,6 @@
+
+class QHelperFunctions {
+ QHelperFunctions._();
+ 
+  
+}

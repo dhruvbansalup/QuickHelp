@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,11 @@ class LoginPage extends StatelessWidget {
               // Back arrow
               IconButton(
                 icon: const Icon(Icons.arrow_back, color: Color(0xFF3A7464)),
-                onPressed: () => Navigator.pop(context),
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
               ),
 
               const SizedBox(height: 10),
@@ -149,7 +153,7 @@ class LoginPage extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   icon: Image.asset(
-                   'assets/icons/google_icon.webp',
+                   'icons/google.webp',
                     height: 24,
                   ),
                   label: const Text(

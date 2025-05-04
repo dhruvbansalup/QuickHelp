@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:quick_help/screens/login_page.dart';
+import 'package:quick_help/utils/constants/appcolors.dart' show QAppColors;
+import 'package:quick_help/features/authentication/screens/login_screen.dart' show LoginScreen;
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -20,7 +20,8 @@ class WelcomeScreen extends StatelessWidget {
               // App Logo
               Center(
                 child: Image.asset(
-                  'assets/icons/app_logo.png',
+                  'logos/logo.png',
+                  width: 180,
                   height: 180,
                 ),
               ),
@@ -71,18 +72,18 @@ class WelcomeScreen extends StatelessWidget {
               // Consumer Card
               buildAccountOptionCard(
                 context,
-                image: 'assets/icons/consumer.png',
+                image: 'icons/consumer.png',
                 title: 'Consumer',
                 subtitle: 'Click here to continue as a consumer',
                 onTap: () {
                   // Navigate to consumer screen
-                  Navigator.of(context).pushReplacement(
+                    Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return const LoginPage();
+                      return const LoginScreen();
                       },
                     ),
-                  );
+                    );
                 },
               ),
               const SizedBox(height: 16),
@@ -90,15 +91,15 @@ class WelcomeScreen extends StatelessWidget {
               // Service Provider Card
               buildAccountOptionCard(
                 context,
-                image: 'assets/icons/worker.png',
+                image: 'icons/worker.png',
                 title: 'Service Provider',
                 subtitle: 'Click here to continue as a service provider',
                 onTap: () {
                   // Navigate to provider screen
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                        return const LoginPage();
+                        return const LoginScreen();
                       },
                     ),
                   );
@@ -165,44 +166,55 @@ class WelcomeScreen extends StatelessWidget {
     required String subtitle,
     required VoidCallback onTap,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFB2EBF2), width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            Image.asset(image, height: 50),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF235953),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Color(0xFF235953),
-                    ),
-                  ),
-                ],
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      color: QAppColors.scaffoldBackground,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0xFFB2EBF2), width: 2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            children: [
+             Image.asset(
+                image,
+                width: 50,
+                height: 50,
               ),
-            ),
-            const Icon(Icons.arrow_forward_ios, color: Color(0xFF235953)),
-          ],
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF235953),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFF235953),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios, color: Color(0xFF235953)),
+            ],
+          ),
         ),
       ),
     );

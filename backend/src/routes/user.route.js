@@ -24,6 +24,7 @@ router.post("/register", userValidators.registerUser, handleValidationErrors, us
 router.post("/login", userValidators.loginUser, handleValidationErrors, userControllers.loginUser);
 router.get("/profile",authMiddleware.authUser,userControllers.getUserProfile);
 router.get("/logout",authMiddleware.authUser,userControllers.logoutUser);
+router.get("/verifyToken",authMiddleware.verifyToken,()=>{res.status(200).json({message:"Token is valid!"})});
 
 
 export default router;

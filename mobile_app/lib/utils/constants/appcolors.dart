@@ -20,8 +20,13 @@ class QAppColors {
   static const Color subText = Color(0xFF4B5B5A);
   static const Color textBlue = Color(0xFF0033A0);
 
-  static const Color lightText = Color(0xFF000000);
+  static const Color lightText = QAppColors.shade9;
   static const Color darkText = Color(0xFFFFFFFF);
 
+  static const Color transparentBlack = Color.fromRGBO(0, 0, 0, 0.5); // 50% opacity
+  static const Color transparentWhite = Color.fromRGBO(255, 255, 255, 0.5);
+  
+
   static const Color buttonColor = Color.fromARGB(255, 9, 22, 22);
+  static const Color lightButtonColor = Color(0xFFFFFFFF);
 }

@@ -1,183 +1,186 @@
 import 'package:flutter/material.dart';
+import 'package:quick_help/common/styles/spacing_styles.dart';
+import 'package:quick_help/utils/constants/appcolors.dart';
+import 'package:quick_help/utils/constants/image_strings.dart';
+import 'package:quick_help/utils/constants/sizing.dart';
+import 'package:quick_help/utils/constants/text_strings.dart';
+import 'package:quick_help/utils/helpers/helper_functions.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = QHelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: const Color(0xFFFDF4E8), // Light beige background
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
+          padding: QSpacingStyles.paddingWithAppBar,
+          child:
+          //Main Column
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              //Back Arrow
+              IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: isDark ? QAppColors.darkText : QAppColors.lightText,
+                ),
+                onPressed: () {},
+              ),
 
-              // Progress bar
-              Row(
+              //Title
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF3A7464),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      height: 5,
-                      color: Colors.white,
+                  Text(
+                    QTextStrings.loginRegister,
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 30),
-
-              // Back arrow
-              IconButton(
-                icon: const Icon(Icons.arrow_back, color: Color(0xFF3A7464)),
-                onPressed: () {
-                  if (Navigator.canPop(context)) {
-                    Navigator.pop(context);
-                  }
-                },
-              ),
-
-              const SizedBox(height: 10),
-
-              const Text(
-                'Login / Register',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF3A7464),
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              const Text(
-                'Enter your phone number',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF3A7464),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Phone number input row
-              Row(
-                children: [
-                  Container(
-                    width: 60,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF0F1F3),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      '+91',
-                      style: TextStyle(fontSize: 16),
-                    ),
+              //Form
+              Form(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: QSizes.spaceBtwSections,
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF0F1F3),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const TextField(
-                        keyboardType: TextInputType.phone,
+                  child: Column(
+                    children: [
+                      //Email TextField
+                      TextFormField(
                         decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Phone number',
+                          labelText: QTextStrings.enterEmail,
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
 
-              const SizedBox(height: 20),
+                      const SizedBox(height: QSizes.spaceBtwInputFields),
 
-              // Continue Button
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF235953),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Continue',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                      //Password TextField
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: QTextStrings.enterPassword,
+                        ),
+                      ),
+
+                      const SizedBox(height: QSizes.spaceBtwInputFields / 2),
+
+                      //Remember Me & Forgot Password
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //Remember Me
+                          Row(
+                            children: [
+                              Checkbox(value: true, onChanged: (value) {}),
+                              const Text(QTextStrings.rememberMe),
+                            ],
+                          ),
+
+                          //Forgot Password
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(QTextStrings.forgotPassword),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: QSizes.spaceBtwInputFields),
+
+                      //Continue Button
+                      SizedBox(
+                        width: double.infinity,
+
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                isDark
+                                    ? QAppColors.lightButtonColor
+                                    : QAppColors.buttonColor,
+                          ),
+                          child: Padding(
+                            padding: QSpacingStyles.paddingInsideButton,
+                            child: Text(
+                              QTextStrings.continue_,
+                              style: TextStyle(
+                                color:
+                                    isDark
+                                        ? QAppColors.lightText
+                                        : QAppColors.darkText,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
 
-              const SizedBox(height: 20),
-
-              // Divider with OR
+              //Divider with or
               Row(
-                children: const [
-                  Expanded(child: Divider(thickness: 1, color: Color(0xFF3A7464))),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'or',
-                      style: TextStyle(color: Color(0xFF3A7464)),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color:
+                          isDark ? QAppColors.darkText : QAppColors.lightText,
+                      thickness: 0.8,
+                      indent: 60,
+                      endIndent: 5,
                     ),
                   ),
-                  Expanded(child: Divider(thickness: 1, color: Color(0xFF3A7464))),
+                  Text(
+                    "or",
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color:
+                          isDark ? QAppColors.darkText : QAppColors.lightText,
+                      thickness: 0.8,
+                      indent: 5,
+                      endIndent: 60,
+                    ),
+                  ),
                 ],
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: QSizes.spaceBtwSections / 2),
 
-              // Google Button
+              // Login with Google Button
               SizedBox(
                 width: double.infinity,
-                height: 50,
-                child: ElevatedButton.icon(
+                child: OutlinedButton.icon(
                   onPressed: () {},
-                  icon: Image.asset(
-                   'icons/google.webp',
-                    height: 24,
-                  ),
-                  label: const Text(
-                    'Continue with Google',
-                    style: TextStyle(fontSize: 16, color: Color(0xFF235953)),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF0F1F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                  icon: Image.asset(QImages.google, height: 20, width: 20),
+                  label: Padding(
+                    padding: QSpacingStyles.paddingInsideButton,
+                    child: Text(QTextStrings.continueWithGoogle),
                   ),
                 ),
               ),
 
-              const Spacer(),
-
-              // Disclaimer
-              const Padding(
-                padding: EdgeInsets.only(bottom: 16),
+              //Disclaimer
+              Padding(
+                padding: const EdgeInsets.only(top: QSizes.spaceBtwSections),
                 child: Text(
-                  'By continuing, you consent to receiving calls, Whatsapp or SMS/RCS messages, including by automated means, from QuickHelp and its affiliates to the number provided.',
-                  style: TextStyle(fontSize: 14, color: Color(0xFF235953)),
+                  QTextStrings.disclaimer,
                   textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color:
+                        isDark
+                            ? QAppColors.transparentWhite
+                            : QAppColors.transparentBlack,
+                  ),
                 ),
               ),
             ],

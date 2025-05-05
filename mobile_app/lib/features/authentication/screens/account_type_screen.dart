@@ -1,74 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:quick_help/utils/constants/appcolors.dart' show QAppColors;
-import 'package:quick_help/features/authentication/screens/login_screen.dart' show LoginScreen;
+import 'package:quick_help/common/styles/spacing_styles.dart';
+import 'package:quick_help/features/authentication/screens/login_screen.dart';
+import 'package:quick_help/utils/constants/appcolors.dart';
+import 'package:quick_help/utils/constants/image_strings.dart';
+import 'package:quick_help/utils/constants/sizing.dart';
+import 'package:quick_help/utils/constants/text_strings.dart';
+import 'package:quick_help/utils/helpers/helper_functions.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+class AccountTypeScreen extends StatelessWidget {
+  const AccountTypeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = QHelperFunctions.isDarkMode(context);
+
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF5E9), // light beige background
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          padding: QSpacingStyles.paddingWithAppBar,
+          child:
+          //Main Column
+          Column(
             children: [
-              const SizedBox(height: 40),
+              //Logo, Title and Subtitle
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage(
+                      isDark ? QImages.logoWhite : QImages.logoBlue,
+                    ),
+                    height: 240,
+                    width: 240,
+                  ),
 
-              // App Logo
-              Center(
-                child: Image.asset(
-                  'logos/logo.png',
-                  width: 180,
-                  height: 180,
-                ),
+                  Text(
+                    QTextStrings.accountTypeSelectionTitle,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: QSizes.sm),
+                  Text(
+                    QTextStrings.accountTypeSelectionSubtitle,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
               ),
 
-              const SizedBox(height: 16),
-
-              // App Name and Tagline
-              const Text(
-                'QUICK HELP',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF0033A0), // Dark blue
-                ),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                'LOCAL HELP, INSTANTLY!',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.indigo,
-                  letterSpacing: 1.2,
-                ),
-              ),
-
-              const SizedBox(height: 40),
-
-              // Choose Your Account Type
-              const Text(
-                'Choose Your Account Type',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF235953),
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Choose one option from the given choices',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF235953),
-                ),
-              ),
-              const SizedBox(height: 30),
-
+              //Buttons for Account Types
               // Consumer Card
               buildAccountOptionCard(
                 context,
@@ -77,13 +57,13 @@ class WelcomeScreen extends StatelessWidget {
                 subtitle: 'Click here to continue as a consumer',
                 onTap: () {
                   // Navigate to consumer screen
-                    Navigator.of(context).push(
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
-                      return const LoginScreen();
+                        return const LoginScreen();
                       },
                     ),
-                    );
+                  );
                 },
               ),
               const SizedBox(height: 16),
@@ -133,7 +113,10 @@ class WelcomeScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFFB2EBF2), width: 2),
+                    border: Border.all(
+                      color: const Color(0xFFB2EBF2),
+                      width: 2,
+                    ),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Row(
@@ -168,9 +151,7 @@ class WelcomeScreen extends StatelessWidget {
   }) {
     return Card(
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: QAppColors.scaffoldBackground,
       child: GestureDetector(
         onTap: onTap,
@@ -183,11 +164,7 @@ class WelcomeScreen extends StatelessWidget {
           ),
           child: Row(
             children: [
-             Image.asset(
-                image,
-                width: 50,
-                height: 50,
-              ),
+              Image.asset(image, width: 50, height: 50),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(

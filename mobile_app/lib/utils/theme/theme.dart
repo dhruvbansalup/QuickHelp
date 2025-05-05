@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/theme/custom_theme/appbar_theme.dart';
-import 'package:quick_help/utils/theme/custom_theme/elevated_button_theme.dart';
 import 'package:quick_help/utils/theme/custom_theme/text_theme.dart';
 
 class QAppTheme {
@@ -14,7 +13,6 @@ class QAppTheme {
     primaryColor: QAppColors.shade5,
     scaffoldBackgroundColor: QAppColors.scaffoldBackground,
     textTheme: QTextTheme.lightTextTheme,
-    elevatedButtonTheme: QElevatedButtonTheme.LightElevatedButtonTheme,
     appBarTheme: QAppBarTheme.LightAppBarTheme,
 
   );

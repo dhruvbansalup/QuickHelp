@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:async' show Timer;
-import 'package:quick_help/features/authentication/screens/welcome_screen.dart' show WelcomeScreen;
-import 'package:quick_help/utils/constants/appcolors.dart' show QAppColors;
+import 'dart:async';
+import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/constants/image_strings.dart';
-
+import 'package:quick_help/features/authentication/screens/account_type_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +18,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
     const delay = Duration(seconds: 3);
     Timer(delay, () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const AccountTypeScreen()),
+      );
     });
   }
 
@@ -31,13 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-            Image.asset(
-              QImages.logoBlue,
-              width: 350,
-              height: 350,
-            ),
-          ],
+          children: [Image.asset(QImages.logoBlue, width: 350, height: 350)],
         ),
       ),
     );

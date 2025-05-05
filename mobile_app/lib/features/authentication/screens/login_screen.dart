@@ -49,8 +49,9 @@ class LoginScreen extends StatelessWidget {
               //Form
               Form(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: QSizes.spaceBtwSections,
+                  padding: const EdgeInsets.only(
+                    top: QSizes.spaceBtwSections,
+                    bottom: QSizes.spaceBtwInputFields,
                   ),
                   child: Column(
                     children: [
@@ -129,7 +130,7 @@ class LoginScreen extends StatelessWidget {
               //Divider with or
               const QFormDividerWithOr(),
 
-              const SizedBox(height: QSizes.spaceBtwSections),
+              const SizedBox(height: QSizes.spaceBtwInputFields),
 
               // Continue with Google Button
               SizedBox(

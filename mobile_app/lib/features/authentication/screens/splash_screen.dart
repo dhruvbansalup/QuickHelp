@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/constants/image_strings.dart';
 import 'package:quick_help/features/authentication/screens/account_type_screen.dart';
 

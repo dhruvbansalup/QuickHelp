@@ -41,7 +41,8 @@ dependencies:
   flutter_dotenv: ^5.0.2
 
   # State Management
-  get_storage: ^2.0.3
+  get_storage: ^2.1.1
+  firebase_core: ^3.13.0
 
 dev_dependencies:
   flutter_test:

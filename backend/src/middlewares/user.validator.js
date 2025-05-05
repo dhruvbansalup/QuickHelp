@@ -11,7 +11,7 @@ const registerUser = [
   body('role')
     .notEmpty().withMessage("Role is Required").bail()
     .isIn(['consumer', 'service_provider', 'admin']).withMessage('Role must be one of consumer, service_provider, or admin'),
-  body('phone').isNumeric().withMessage('Phone number must be numeric'),
+  body('phone').optional().isNumeric().withMessage('Phone number must be numeric'),
   body('name').optional().isString().withMessage('Name must be a string'),
 ];
 

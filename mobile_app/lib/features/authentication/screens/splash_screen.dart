@@ -4,6 +4,8 @@ import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/constants/image_strings.dart';
 import 'package:quick_help/features/authentication/screens/account_type_screen.dart';
 
+import '../../../utils/helpers/helper_functions.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -12,6 +14,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+
   @override
   void initState() {
     super.initState();
@@ -27,13 +31,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = QHelperFunctions.isDarkMode(context);
     return Scaffold(
-      backgroundColor: QAppColors.scaffoldBackground,
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [Image.asset(QImages.logoBlue, width: 350, height: 350)],
+          children: [Image.asset(isDark?QImages.logoWhite: QImages.logoBlue, width: 350, height: 350)],
         ),
       ),
     );

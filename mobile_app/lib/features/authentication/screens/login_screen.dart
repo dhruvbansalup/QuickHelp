@@ -6,6 +6,8 @@ import 'package:quick_help/utils/constants/sizing.dart';
 import 'package:quick_help/utils/constants/text_strings.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 
+import '../../../common/widgets/form_divider.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -52,6 +54,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
+                      
                       //Email TextField
                       TextFormField(
                         decoration: InputDecoration(
@@ -124,39 +127,11 @@ class LoginScreen extends StatelessWidget {
               ),
 
               //Divider with or
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Divider(
-                      color:
-                          isDark ? QAppColors.darkText : QAppColors.lightText,
-                      thickness: 0.8,
-                      indent: 60,
-                      endIndent: 5,
-                    ),
-                  ),
-                  Text(
-                    "or",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color:
-                          isDark ? QAppColors.darkText : QAppColors.lightText,
-                      thickness: 0.8,
-                      indent: 5,
-                      endIndent: 60,
-                    ),
-                  ),
-                ],
-              ),
+              const QFormDividerWithOr(),
 
-              const SizedBox(height: QSizes.spaceBtwSections / 2),
+              const SizedBox(height: QSizes.spaceBtwSections),
 
-              // Login with Google Button
+              // Continue with Google Button
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
 import 'package:quick_help/features/authentication/screens/login_screen.dart';
+import 'package:quick_help/features/authentication/screens/widgets/account_type_option_card.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/constants/image_strings.dart';
 import 'package:quick_help/utils/constants/sizing.dart';
 import 'package:quick_help/utils/constants/text_strings.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
+import 'package:quick_help/common/widgets/form_divider.dart';
 
 class AccountTypeScreen extends StatelessWidget {
   const AccountTypeScreen({super.key});
@@ -47,14 +49,14 @@ class AccountTypeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: QSizes.spaceBtwSections),
 
               //Buttons for Account Types
               // Consumer Card
-              buildAccountOptionCard(
-                context,
-                image: 'icons/consumer.png',
-                title: 'Consumer',
-                subtitle: 'Click here to continue as a consumer',
+              AccountTypeOptionCard(
+                image: QImages.consumer01,
+                title: QTextStrings.consumer,
+                subtitle: QTextStrings.consumerAccountTypeSubtitle,
                 onTap: () {
                   // Navigate to consumer screen
                   Navigator.of(context).push(
@@ -66,14 +68,13 @@ class AccountTypeScreen extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: QSizes.spaceBtwButtons),
 
               // Service Provider Card
-              buildAccountOptionCard(
-                context,
-                image: 'icons/worker.png',
-                title: 'Service Provider',
-                subtitle: 'Click here to continue as a service provider',
+              AccountTypeOptionCard(
+                image: QImages.worker01,
+                title: QTextStrings.serviceProvider,
+                subtitle: QTextStrings.serviceProviderAccountTypeSubtitle,
                 onTap: () {
                   // Navigate to provider screen
                   Navigator.of(context).push(
@@ -86,23 +87,12 @@ class AccountTypeScreen extends StatelessWidget {
                 },
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: QSizes.spaceBtwInputFields),
 
               // Divider
-              Row(
-                children: const [
-                  Expanded(child: Divider(color: Color(0xFF235953))),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'or',
-                      style: TextStyle(color: Color(0xFF235953)),
-                    ),
-                  ),
-                  Expanded(child: Divider(color: Color(0xFF235953))),
-                ],
-              ),
-              const SizedBox(height: 24),
+              const QFormDividerWithOr(),
+
+              const SizedBox(height: QSizes.spaceBtwInputFields),
 
               // Guest button
               GestureDetector(
@@ -111,85 +101,24 @@ class AccountTypeScreen extends StatelessWidget {
                 },
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: QSpacingStyles.paddingInsideButton,
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFFB2EBF2),
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: QAppColors.shade2, width: 2),
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.person_outline, color: Color(0xFF235953)),
-                      SizedBox(width: 8),
-                      Text(
-                        'Continue as a guest',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xFF235953),
-                        ),
+                      Icon(
+                        Icons.person_outline,
+                        color: isDark ? QAppColors.darkText : QAppColors.text,
                       ),
+                      const SizedBox(width: QSizes.sm),
+                      Text('Continue as a guest'),
                     ],
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildAccountOptionCard(
-    BuildContext context, {
-    required String image,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: QAppColors.scaffoldBackground,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            border: Border.all(color: const Color(0xFFB2EBF2), width: 2),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            children: [
-              Image.asset(image, width: 50, height: 50),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF235953),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF235953),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(Icons.arrow_forward_ios, color: Color(0xFF235953)),
             ],
           ),
         ),

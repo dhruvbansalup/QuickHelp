@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
+import 'package:quick_help/features/authentication/controllers/login_register_controller.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/constants/image_strings.dart';
 import 'package:quick_help/utils/constants/sizing.dart';
 import 'package:quick_help/utils/constants/text_strings.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
+import 'package:get/get.dart';
+import 'package:quick_help/utils/validators/validation.dart';
 
 import '../../../common/widgets/form_divider.dart';
 
@@ -15,7 +18,12 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = QHelperFunctions.isDarkMode(context);
 
+    // Initialize the controller if not already done
+    final controller = Get.put(LoginRegisterController());
+
     return Scaffold(
+      appBar: AppBar(),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: QSpacingStyles.paddingWithAppBar,
@@ -24,18 +32,9 @@ class LoginScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //Back Arrow
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: isDark ? QAppColors.darkText : QAppColors.lightText,
-                ),
-                onPressed: () {},
-              ),
-
               //Title
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     QTextStrings.loginRegister,
@@ -43,11 +42,24 @@ class LoginScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  Obx(
+                    () => Text(
+                      controller.role.value.toUpperCase(),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w200,
+                        color:
+                            isDark
+                                ? QAppColors.transparentWhite
+                                : QAppColors.transparentBlack,
+                      ),
+                    ),
+                  ),
                 ],
               ),
 
               //Form
               Form(
+                key: controller.formKey, // Form key for validation
                 child: Padding(
                   padding: const EdgeInsets.only(
                     top: QSizes.spaceBtwSections,
@@ -55,20 +67,42 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      
                       //Email TextField
                       TextFormField(
+                        controller: controller.email,
+                        validator:
+                            (value) => QValidation.isEmpty("Email", value),
                         decoration: InputDecoration(
                           labelText: QTextStrings.enterEmail,
+                          prefixIcon: const Icon(Icons.email_outlined),
                         ),
                       ),
 
                       const SizedBox(height: QSizes.spaceBtwInputFields),
 
                       //Password TextField
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: QTextStrings.enterPassword,
+                      Obx(
+                        () => TextFormField(
+                          controller: controller.password,
+                          validator:
+                              (value) => QValidation.validatePassword(value),
+                          obscureText:
+                              controller.hidePassword.value, // Hide password
+                          decoration: InputDecoration(
+                            labelText: QTextStrings.enterPassword,
+                            prefixIcon: const Icon(Icons.lock_outline),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                controller.hidePassword.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                controller.hidePassword.value =
+                                    !controller.hidePassword.value;
+                              },
+                            ),
+                          ),
                         ),
                       ),
 
@@ -81,7 +115,15 @@ class LoginScreen extends StatelessWidget {
                           //Remember Me
                           Row(
                             children: [
-                              Checkbox(value: true, onChanged: (value) {}),
+                              Obx(
+                                () => Checkbox(
+                                  value: controller.rememberMe.value,
+                                  onChanged: (value) {
+                                    controller.rememberMe.value =
+                                        value ?? false;
+                                  },
+                                ),
+                              ),
                               const Text(QTextStrings.rememberMe),
                             ],
                           ),
@@ -101,7 +143,10 @@ class LoginScreen extends StatelessWidget {
                         width: double.infinity,
 
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            //Send Login / Register Request
+                            controller.loginSignUp();
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 isDark

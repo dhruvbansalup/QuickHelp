@@ -8,9 +8,9 @@ class QAppBarTheme {
     backgroundColor: Colors.transparent,
     foregroundColor: Colors.transparent,
     elevation: 0,
-    iconTheme: const IconThemeData(color: Colors.black),
+    iconTheme: const IconThemeData(color: QAppColors.lightText),
     titleTextStyle: const TextStyle(
-      color: QAppColors.text,
+      color: QAppColors.lightText,
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
@@ -20,9 +20,9 @@ class QAppBarTheme {
     backgroundColor: Colors.transparent,
     foregroundColor: Colors.transparent,
     elevation: 0,
-    iconTheme: const IconThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: QAppColors.darkText),
     titleTextStyle: const TextStyle(
-      color: QAppColors.text,
+      color: QAppColors.darkText,
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),

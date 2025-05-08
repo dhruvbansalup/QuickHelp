@@ -8,6 +8,8 @@ import 'package:quick_help/utils/constants/sizing.dart';
 import 'package:quick_help/utils/constants/text_strings.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 import 'package:quick_help/common/widgets/form_divider.dart';
+import 'package:get/get.dart';
+import 'package:quick_help/features/authentication/controllers/login_register_controller.dart';
 
 class AccountTypeScreen extends StatelessWidget {
   const AccountTypeScreen({super.key});
@@ -15,6 +17,9 @@ class AccountTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = QHelperFunctions.isDarkMode(context);
+    
+    // Initialize the controller if not already done
+    final controller = Get.put(LoginRegisterController());
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -53,11 +58,14 @@ class AccountTypeScreen extends StatelessWidget {
 
               //Buttons for Account Types
               // Consumer Card
-              AccountTypeOptionCard(
+              QAccountTypeOptionCard(
                 image: QImages.consumer01,
                 title: QTextStrings.consumer,
                 subtitle: QTextStrings.consumerAccountTypeSubtitle,
                 onTap: () {
+                  
+                  controller.role.value = 'consumer'; // Set role to consumer
+
                   // Navigate to consumer screen
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -71,11 +79,14 @@ class AccountTypeScreen extends StatelessWidget {
               const SizedBox(height: QSizes.spaceBtwButtons),
 
               // Service Provider Card
-              AccountTypeOptionCard(
+              QAccountTypeOptionCard(
                 image: QImages.worker01,
                 title: QTextStrings.serviceProvider,
                 subtitle: QTextStrings.serviceProviderAccountTypeSubtitle,
                 onTap: () {
+
+                  controller.role.value = 'service_provider'; // Set role to service provider
+
                   // Navigate to provider screen
                   Navigator.of(context).push(
                     MaterialPageRoute(

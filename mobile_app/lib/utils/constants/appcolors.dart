@@ -4,6 +4,7 @@ class QAppColors {
   QAppColors._(); // Private constructor to prevent instantiation
   
   static const Color scaffoldBackground = Color(0xFFFDF4E8);
+  static const Color scaffoldBackgroundDark = Color(0xFF1A1A1A);
 
   static const Color shade0 = Color(0xFFE5FFFE);
   static const Color shade1 = Color(0xFFB0EEEB);

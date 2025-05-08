@@ -22,7 +22,7 @@ class QAppTheme {
     fontFamily: 'Poppins',
     brightness: Brightness.dark,
     primaryColor: QAppColors.shade5,
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: QAppColors.scaffoldBackgroundDark,
     textTheme: QTextTheme.darkTextTheme,
     appBarTheme: QAppBarTheme.DarkAppBarTheme
   );

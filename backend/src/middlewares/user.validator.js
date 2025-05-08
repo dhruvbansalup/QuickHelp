@@ -27,11 +27,21 @@ const loginUser = [
     .isIn(['consumer', 'service_provider', 'admin']).withMessage('Role must be one of consumer, service_provider, or admin'),
 ];
 
+const doesEmailExists = [
+  body('email')
+    .notEmpty().withMessage("Email is Required").bail()
+    .isEmail().withMessage('Invalid email format'),
+  body('role')
+    .notEmpty().withMessage("Role is Required").bail()
+    .isIn(['consumer', 'service_provider', 'admin']).withMessage('Role must be one of consumer, service_provider, or admin'),
+];
+
 
 // Exporting the validator functions
 const userValidators = {
   registerUser,
   loginUser,
+  doesEmailExists,
 };
 
 export default userValidators;

@@ -63,12 +63,27 @@ const getUserProfile = asyncErrorHandler(async (req, res, next) => {
   res.status(200).json({ message: "User profile retrieved successfully!", user });
 });
 
+
+const doesEmailExists = asyncErrorHandler(async (req, res, next) => {
+  const { email, role } = req.body;
+
+  const user = await userServices.findUser({ email,role });
+  if (user) {
+    return res.status(200).json({ message: `Email already registered as ${role}` });
+  } else {
+    return res.status(401).json({ message: `Email not registered as ${role}` });
+  }
+});
+
+
+
 // Exporting the controller functions
 const userControllers = {
   registerUser,
   loginUser,
   logoutUser,
   getUserProfile,
+  doesEmailExists,
 };
 
 export default userControllers;

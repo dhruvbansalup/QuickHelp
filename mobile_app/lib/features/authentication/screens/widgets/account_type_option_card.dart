@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 
-class AccountTypeOptionCard extends StatelessWidget {
+class QAccountTypeOptionCard extends StatelessWidget {
   final String image;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
 
-  const AccountTypeOptionCard({
+  const QAccountTypeOptionCard({
     super.key,
     required this.image,
     required this.title,

@@ -11,6 +11,13 @@ class QSpacingStyles{
     bottom: QSizes.defaultSpace,
   );
 
+  static const EdgeInsetsGeometry defaultPagePadding = EdgeInsets.only(
+    top: QSizes.defaultSpace,
+    left: QSizes.defaultSpace,
+    right: QSizes.defaultSpace,
+    bottom: QSizes.defaultSpace,
+  );
+
   static const EdgeInsetsGeometry paddingInsideButton = EdgeInsets.symmetric(
     vertical: QSizes.md,
     horizontal: QSizes.lg,

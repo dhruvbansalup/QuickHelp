@@ -26,15 +26,15 @@ class LoginScreen extends StatelessWidget {
 
       body: SingleChildScrollView(
         child: Padding(
-          padding: QSpacingStyles.paddingWithAppBar,
+          padding: QSpacingStyles.defaultPagePadding,
           child:
           //Main Column
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Title
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     QTextStrings.loginRegister,
@@ -42,6 +42,7 @@ class LoginScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
+                  const SizedBox(height: QSizes.sm),
                   Obx(
                     () => Text(
                       controller.role.value.toUpperCase(),
@@ -62,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                 key: controller.formKey, // Form key for validation
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    top: QSizes.spaceBtwSections,
+                    top: QSizes.spaceBtwSections / 2,
                     bottom: QSizes.spaceBtwInputFields,
                   ),
                   child: Column(

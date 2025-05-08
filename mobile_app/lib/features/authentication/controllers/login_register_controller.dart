@@ -22,6 +22,10 @@ class LoginRegisterController extends GetxController {
   final password = TextEditingController();
   final role = 'consumer'.obs; // Default role is 'consumer'
 
+  //Snackbar variables
+  String? snackbarMessage = "";
+  int? snackbarType = -1; // 0 = success, 1 = error, 2 = warning
+
   // Form key for form validation
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -33,117 +37,124 @@ class LoginRegisterController extends GetxController {
       // Check Internet Connection
       final hasInternet = await QDeviceUtility.hasInternetConnection();
       if (!hasInternet) {
-        Qsnackbars.warningSnackbar(message: 'No Internet Connection');
+        snackbarType = 1; // Warning
+        snackbarMessage = '${snackbarMessage ?? ''}No Internet Connection';
         return;
       }
 
       //Form Validation
       if (!formKey.currentState!.validate()) {
-        //Form is not valid
-        Qsnackbars.warningSnackbar(
-          message: 'Please fill all the fields correctly',
-        );
+        snackbarType = 2; // Warning
+        snackbarMessage =
+            '${snackbarMessage ?? ''}Please fill all the fields correctly';
         return;
       }
 
       // Check if user is already registered
-
       bool isUserExist = false;
 
-      await http
-          .post(
-            Uri.parse(QApiEndpoints.doesUserExist!),
-            body: {'email': email.text.trim(), 'role': role.value},
-          )
-          .then((response) {
-            if (response.statusCode == 200) {
-              isUserExist = true;
-            } else if (response.statusCode == 500) {
-              isUserExist = false;
-            } else {
-              Qsnackbars.errorSnackbar(
-                message: 'Something went wrong: ${response.body}',
-              );
-              return;
-            }
-          });
+      final userExistResponse = await http.post(
+        Uri.parse(QApiEndpoints.doesUserExist!),
+        body: {'email': email.text.trim(), 'role': role.value},
+      );
+
+      if (userExistResponse.statusCode == 200) {
+        isUserExist = true;
+      } else if (userExistResponse.statusCode == 500) {
+        isUserExist = false;
+      } else {
+        snackbarType = 1; // Error
+        snackbarMessage =
+            (snackbarMessage ?? '') +
+            jsonDecode(userExistResponse.body)['message'];
+        return; // Stop execution if the check fails
+      }
 
       //Register User if not exist
       if (!isUserExist) {
-        await http
-            .post(
-              Uri.parse(QApiEndpoints.registerUser!),
-              body: {
-                'email': email.text.trim(),
-                'password': password.text.trim(),
-                'role': role.value,
-              },
-            )
-            .then((response) {
-              if (response.statusCode == 200) {
-                Qsnackbars.successSnackbar(message: 'Registered successfully!');
-              } else if (response.statusCode == 500) {
-                Qsnackbars.warningSnackbar(
-                  message: 'User registration failed!',
-                );
-                return;
-              } else {
-                Qsnackbars.errorSnackbar(
-                  message: jsonDecode(response.body)['message'],
-                );
-                return;
-              }
-            });
+        final registerResponse = await http.post(
+          Uri.parse(QApiEndpoints.registerUser!),
+          body: {
+            'email': email.text.trim(),
+            'password': password.text.trim(),
+            'role': role.value,
+          },
+        );
+
+        if (registerResponse.statusCode == 201) {
+          snackbarType = 0; // Success
+          snackbarMessage =
+              (snackbarMessage ?? '') +
+              jsonDecode(registerResponse.body)['message'];
+        } else {
+          snackbarType = 1; // Error
+          snackbarMessage =
+              (snackbarMessage ?? '') +
+              jsonDecode(registerResponse.body)['message'];
+          return; // Stop execution if registration fails
+        }
       }
 
       // Login User
-      http
-          .post(
-            Uri.parse(QApiEndpoints.loginUser!),
-            body: {
-              'email': email.text.trim(),
-              'password': password.text.trim(),
-              'role': role.value,
-            },
-          )
-          .then((response) {
-            if (response.statusCode == 200) {
-              Qsnackbars.successSnackbar(
-                title: "Login Successfull!!",
-                message: jsonDecode(response.body)['message'],
-              );
-            } else if (response.statusCode == 500) {
-              Qsnackbars.warningSnackbar(
-                title: 'Login failed!',
-                message: jsonDecode(response.body)['message'],
-              );
-              return;
-            } else {
-              Qsnackbars.errorSnackbar(
-                message: jsonDecode(response.body)['message'],
-              );
-              return;
-            }
-          });
+      final loginResponse = await http.post(
+        Uri.parse(QApiEndpoints.loginUser!),
+        body: {
+          'email': email.text.trim(),
+          'password': password.text.trim(),
+          'role': role.value,
+        },
+      );
+      if (loginResponse.statusCode == 200) {
+        snackbarType = 0; // Success
+        snackbarMessage =
+            (snackbarMessage ?? '') + jsonDecode(loginResponse.body)['message'];
+      } else {
+        snackbarType = 1; // Error
+        snackbarMessage =
+            (snackbarMessage ?? '') + jsonDecode(loginResponse.body)['message'];
+        return; // Stop execution if login fails
+      }
 
-      // move to required screen based on role
-
+      // // move to required screen based on role
       if (role.value == "consumer") {
         // Navigate to Consumer Home Screen
-        Get.offAll(() => const ConsumerHome());
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Get.offAll(() => const ConsumerHome());
+        });
       } else if (role.value == "service_provider") {
         // Navigate to Service Provider Home Screen
-        Get.offAll(() => const ServiceProviderHome());
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Get.offAll(() => const ServiceProviderHome());
+        });
       } else if (role.value == "admin") {
-        Qsnackbars.errorSnackbar(message: 'Admin login not supported!');
+        snackbarType = 1; // Error
+        snackbarMessage =
+            '${snackbarMessage ?? ''}Admin login not supported!';
       } else {
-        Qsnackbars.errorSnackbar(message: 'Role not recognized');
+        snackbarType = 1; // Error
+        snackbarMessage = '${snackbarMessage ?? ''}Role not recognized';
       }
     } catch (e) {
-      Qsnackbars.errorSnackbar(message: 'Something went wrong: $e');
+      snackbarType = 1; // Error
+      snackbarMessage = e.toString();
     } finally {
+      //Clear the text fields
+      email.clear();
+      password.clear();
+
       //Stop Loading
       QFullScreenLoadingAnimation.stop();
+
+      //Show snackbars
+      if (snackbarMessage != null) {
+        if (snackbarType == 0) {
+          Qsnackbars.successSnackbar(message: snackbarMessage!);
+        } else if (snackbarType == 1) {
+          Qsnackbars.errorSnackbar(message: snackbarMessage!);
+        } else if (snackbarType == 2) {
+          Qsnackbars.warningSnackbar(message: snackbarMessage!);
+        }
+      }
     }
   }
 }

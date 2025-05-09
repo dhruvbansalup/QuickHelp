@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
+import 'package:quick_help/features/consumer.features/search_page.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 
@@ -114,6 +115,16 @@ class ConsumerHome extends StatelessWidget {
             
                 const SizedBox(height: 16),
                 TextField(
+                  readOnly: true,
+                  onTap: () {
+                     Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return SearchPage();
+                      },
+                    ),
+                  );
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search for services',
                     prefixIcon: Icon(Icons.search,

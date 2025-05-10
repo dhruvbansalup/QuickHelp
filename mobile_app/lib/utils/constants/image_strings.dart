@@ -12,4 +12,12 @@ class QImages {
   //AccountSelectionPage
   static const String worker01 = "assets/images/worker01.png";
   static const String consumer01 = "assets/images/consumer01.png";
+
+  //Bottom Nav Bar Icons
+  static const String navHomeIcon="assets/icons/HomeItem.svg";  
+  static const String navRequestIcon="assets/icons/ClipboardText.svg";
+  static const String navMessageIcon="assets/icons/ChatCenteredText.svg";
+  static const String navMoreIcon="assets/icons/DotsThreeCircle.svg";
+
+
 }

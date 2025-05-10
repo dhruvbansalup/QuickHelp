@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
+import 'package:quick_help/common/widgets/bottom_nav_bar.dart';
 import 'package:quick_help/features/consumer.features/search_page.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
@@ -64,7 +65,7 @@ class ConsumerHome extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-    
+    bottomNavigationBar: const QBottomNavBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -323,6 +324,7 @@ class ConsumerHome extends StatelessWidget {
                     },
                   ),
                 ),
+          //    const QBottomNavBar(),
               ],
             ),
           ),

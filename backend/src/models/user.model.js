@@ -3,6 +3,7 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { AddressSchema } from "./address.model.js";
 
 const userSchema = new mongoose.Schema({
   email: { type: String, lowercase: true, required: true },
@@ -12,6 +13,8 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ["consumer", "service_provider", "admin"], required: true },
   isphoneverified: { type: Boolean, default: false },
   isemailverified: { type: Boolean, default: false },
+  addresses: [AddressSchema],
+  profilePic: { type: String },
 }, {
   timestamps: true // Automatically manage createdAt and updatedAt fields
 });
@@ -35,6 +38,5 @@ userSchema.statics.hashPassword = async function (password) {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
-
 
 export const User = mongoose.model("User", userSchema);

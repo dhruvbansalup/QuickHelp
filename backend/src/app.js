@@ -15,9 +15,8 @@ app.use(cookieParser());
 
 
 // Importing routes
-import userRoutes from "./routes/user.route.js";
-
-app.use("/user",userRoutes);
+import routes from "./routes/index.js";
+app.use(routes);
 
 
 // Error handling middleware

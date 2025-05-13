@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:quick_help/features/service_provider.features/home/screens/home.serviceProvider.dart';
 import 'dart:async';
 import 'package:quick_help/utils/constants/image_strings.dart';
 import 'package:quick_help/features/authentication/screens/account_type_screen.dart';
@@ -24,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => AccountTypeScreen()),
+     // MaterialPageRoute(builder: (context) => ServiceProviderHome()),
       );
     });
   }

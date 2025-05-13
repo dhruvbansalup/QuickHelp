@@ -3,7 +3,7 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { AddressSchema } from "./address.model.js";
+import AddressSchema from "./address.model.js";
 
 const userSchema = new mongoose.Schema({
   email: { type: String, lowercase: true, required: true },

@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const ServiceCategorySchema = new mongoose.Schema({
     name: { type: String, required: true },
-    description: { type: String, required: true },
-    imageUrl: { type: String, required: true },
+    description: { type: String },
+    imageUrl: { type: String },
 }, {
     timestamps: true
 });
@@ -13,7 +13,7 @@ const ServiceSchema = new mongoose.Schema({
     description: { type: String },
     category: { type: mongoose.Schema.Types.ObjectId, ref: "ServiceCategory", required: true },
     isCustom: { type: Boolean, default: false },
-    addedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    addedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     images: [{ type: String }],
 }, {
     timestamps: true

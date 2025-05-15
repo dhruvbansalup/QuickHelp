@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
 import 'package:quick_help/features/service_provider.features/home/controllers/list_service_requests.controller.dart';
 import 'package:quick_help/features/service_provider.features/home/screens/requests_list.dart';
-import 'package:quick_help/features/service_provider.features/home/screens/profile_serviceProvider.dart';
-import 'package:quick_help/features/service_provider.features/home/screens/serviceProvider_Noti.dart';
+import 'package:quick_help/features/service_provider.features/drawer/drawer_serviceProvider.dart';
+import 'package:quick_help/features/notifications/screens/notifications.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 class ServiceProviderHome extends StatelessWidget {

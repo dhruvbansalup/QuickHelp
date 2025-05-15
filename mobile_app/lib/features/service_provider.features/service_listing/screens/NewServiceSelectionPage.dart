@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quick_help/features/service_provider.features/service_listing/controllers/ListCategories.controller.dart';
 import 'package:quick_help/features/service_provider.features/service_listing/screens/ExplainNewServicePage.dart';
 
 class NewServiceSelectionPage extends StatefulWidget {
@@ -9,22 +11,7 @@ class NewServiceSelectionPage extends StatefulWidget {
 }
 
 class _ServiceSelectionPageState extends State<NewServiceSelectionPage> {
-  final List<String> serviceTypes = [
-    'Electrician',
-    'Plumber',
-    'Chef',
-    'Car washer',
-    'Laundry',
-    'Painter',
-    'Carpenter',
-    'Household cleaner',
-    'AC service & repair',
-    'Cooler & fan repair',
-    'Electronic repair',
-    'TV & display service',
-    'Fridge service',
-    'Other',
-  ];
+  final ListCategoryController = Get.put(ListServiceCategories());
 
   String? selectedService;
 
@@ -43,17 +30,18 @@ class _ServiceSelectionPageState extends State<NewServiceSelectionPage> {
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-              ),
+              decoration: const InputDecoration(border: OutlineInputBorder()),
               hint: const Text("Select a service"),
               value: selectedService,
-              items: serviceTypes.map((String service) {
-                return DropdownMenuItem<String>(
-                  value: service,
-                  child: Text(service),
-                );
-              }).toList(),
+              items:
+                  ListCategoryController.serviceCategories.map((
+                    String service,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: service,
+                      child: Text(service),
+                    );
+                  }).toList(),
               onChanged: (String? newValue) {
                 setState(() {
                   selectedService = newValue;
@@ -68,30 +56,33 @@ class _ServiceSelectionPageState extends State<NewServiceSelectionPage> {
                   border: OutlineInputBorder(),
                 ),
               ),
-             const SizedBox(height: 24),
-             TextField(
-                decoration: const InputDecoration(
-                  labelText: 'give name to your service',
-                  border: OutlineInputBorder(),
-                ),
+            const SizedBox(height: 24),
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'give name to your service',
+                border: OutlineInputBorder(),
               ),
-               const SizedBox(height: 24),
-               TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Experience in year',
-                  border: OutlineInputBorder(),
-                ),
+            ),
+            const SizedBox(height: 24),
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Experience in year',
+                border: OutlineInputBorder(),
               ),
-              const Spacer(),
+            ),
+            const Spacer(),
             ElevatedButton(
-              onPressed: selectedService != null ? () {
-                 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ExplainNewServicePage()),
-                          );
-                        
-              } : null,
+              onPressed:
+                  selectedService != null
+                      ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ExplainNewServicePage(),
+                          ),
+                        );
+                      }
+                      : null,
               child: const Text('Next'),
             ),
           ],

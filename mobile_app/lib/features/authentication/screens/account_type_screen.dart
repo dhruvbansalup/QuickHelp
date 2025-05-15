@@ -9,7 +9,7 @@ import 'package:quick_help/utils/constants/text_strings.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 import 'package:quick_help/common/widgets/form_divider.dart';
 import 'package:get/get.dart';
-import 'package:quick_help/features/authentication/controllers/login_register_controller.dart';
+import 'package:quick_help/features/authentication/controllers/login_register.controller.dart';
 
 class AccountTypeScreen extends StatelessWidget {
   const AccountTypeScreen({super.key});

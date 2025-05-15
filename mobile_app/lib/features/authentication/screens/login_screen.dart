@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
-import 'package:quick_help/features/authentication/controllers/login_register_controller.dart';
+import 'package:quick_help/features/authentication/controllers/login_register.controller.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/constants/image_strings.dart';
 import 'package:quick_help/utils/constants/sizing.dart';

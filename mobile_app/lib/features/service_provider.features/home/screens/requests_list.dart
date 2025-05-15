@@ -1,29 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quick_help/features/service_provider.features/home/controllers/list_service_requests.controller.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 
-class NewRequestPage extends StatelessWidget {
-  const NewRequestPage({super.key});
+class CompleteRequestPage extends StatelessWidget {
+  const CompleteRequestPage({super.key});
 
   @override
   Widget build(BuildContext context) {
      final isDark = QHelperFunctions.isDarkMode(context);
+
+    final ListServiceController=Get.put(ListServiceRequestsController());
+
     final requests = [
       {
-        'name': 'Bhola Singh',
-        'rating': '4.9',
-        'work': 'Geyser servicing',
-        'location': 'Near Dwarka vegas mall',
+        'name': 'Vishnu Singh',
+        'rating': '4.2',
+        'work': 'Geyser inlet cleaning',
+        'location': 'Near Dwarka sector 21',
         'time': '2.50 pm',
-        'date': '12-05-2025',
+        'date': '01-05-2025',
       },
       {
-        'name': 'Preetam Kumar',
-        'rating': '4.7',
-        'work': 'Wiring external new',
+        'name': 'Surya Kumar',
+        'rating': '3.9',
+        'work': 'roolerepair',
         'location': 'Near Haus Khas Village',
         'time': '9.15 am',
         'date': '12-05-2025',
+      },
+      {
+        'name': 'Rohan paswan',
+        'rating': '4.4',
+        'work': 'Wiring repairr',
+        'location': 'Pocket 4 , Pitampura',
+        'time': '7.20 pm',
+        'date': '02-05-2025',
+      },
+      {
+        'name': 'Virat kohli',
+        'rating': '4.9',
+        'work': 'AC installation',
+        'location': 'Pocket 4 , begumpur',
+        'time': '7.20 pm',
+        'date': '31-04-2025',
+      },
+      {
+        'name': 'riyan parag',
+        'rating': '4.4',
+        'work': 'Oven repair',
+        'location': 'Pocket 4 , Keshavpuram',
+        'time': '7.20 pm',
+        'date': '22-04-2025',
       },
   
     ];
@@ -36,7 +65,7 @@ class NewRequestPage extends StatelessWidget {
           icon:  Icon(Icons.arrow_back_ios, color: isDark ? QAppColors.darkText : QAppColors.lightText),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('New requests'),
+        title: Text(ListServiceController.requestStatus.value),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12.0),
@@ -63,7 +92,7 @@ class NewRequestPage extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 12),
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              //color: Colors.black,
+            //  color: Colors.black,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: isDark ? QAppColors.darkText : QAppColors.lightText),
             ),
@@ -74,7 +103,7 @@ class NewRequestPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                   Row(
                       children: [
                          Icon(Icons.person_outline, color: isDark ? QAppColors.darkText : QAppColors.lightText, size: 20),
                         const SizedBox(width: 6),

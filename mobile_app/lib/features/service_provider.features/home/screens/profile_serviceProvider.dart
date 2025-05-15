@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quick_help/features/authentication/screens/splash_screen.dart';
 import 'package:quick_help/features/service_provider.features/home/screens/MyServicePage.dart';
-import 'package:quick_help/features/service_provider.features/home/screens/NewServiceSelectionPage.dart';
+import 'package:quick_help/features/service_provider.features/service_listing/screens/NewServiceSelectionPage.dart';
 
 class ProfileServiceProviderPage extends StatelessWidget {
   const ProfileServiceProviderPage({super.key});

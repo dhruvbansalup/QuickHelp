@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
-import 'package:quick_help/features/service_provider.features/home/screens/completeRequest.dart';
+import 'package:quick_help/features/service_provider.features/home/controllers/list_service_requests.controller.dart';
+import 'package:quick_help/features/service_provider.features/home/screens/requests_list.dart';
 import 'package:quick_help/features/service_provider.features/home/screens/profile_serviceProvider.dart';
 import 'package:quick_help/features/service_provider.features/home/screens/serviceProvider_Noti.dart';
-import 'package:quick_help/features/service_provider.features/newRequest.dart';
 import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 class ServiceProviderHome extends StatelessWidget {
@@ -12,6 +13,10 @@ class ServiceProviderHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final isDark = QHelperFunctions.isDarkMode(context);
+
+    final ListServiceController=Get.put(ListServiceRequestsController());
+
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -167,9 +172,11 @@ class ServiceProviderHome extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
+                        ListServiceController.requestStatus.value='new';
+
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const NewRequestPage()),
+                          MaterialPageRoute(builder: (context) => const CompleteRequestPage()),
                         );
                       },
                       child: Container(
@@ -193,6 +200,9 @@ class ServiceProviderHome extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
+
+                        ListServiceController.requestStatus.value='completed';
+
                          Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const CompleteRequestPage()),

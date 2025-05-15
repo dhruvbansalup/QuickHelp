@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_help/features/service_provider.features/home/screens/ExplainNewServicePage.dart';
+import 'package:quick_help/features/service_provider.features/service_listing/screens/ExplainNewServicePage.dart';
 
 class NewServiceSelectionPage extends StatefulWidget {
   const NewServiceSelectionPage({super.key});

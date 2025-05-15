@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 const AddressSchema = new mongoose.Schema({
   label: { type: String, required: true }, // e.g., "Home", "Office"
   houseNo: { type: String },

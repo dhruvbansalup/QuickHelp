@@ -66,3 +66,6 @@ static/
 htmlcov/
 .coverage
 .tox/
+
+#Firebase Key
+FirebaseServiceAccountPrivateKey.json

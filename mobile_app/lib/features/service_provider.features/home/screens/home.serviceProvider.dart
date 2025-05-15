@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_help/common/styles/spacing_styles.dart';
 import 'package:quick_help/features/service_provider.features/home/controllers/list_service_requests.controller.dart';
+import 'package:quick_help/features/service_provider.features/home/screens/JobDetails.dart';
 import 'package:quick_help/features/service_provider.features/home/screens/requests_list.dart';
 import 'package:quick_help/features/service_provider.features/drawer/drawer_serviceProvider.dart';
 import 'package:quick_help/features/notifications/screens/notifications.dart';
@@ -132,34 +133,82 @@ class ServiceProviderHome extends StatelessWidget {
                   children: [
                     const Text("Ongoing Work", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 12),
-                    OngoingWorkCard(
-                      name: "Shyam Singh",
-                      rating: "4.7",
-                      time: "3.50 pm",
-                      date: "12-05-2025",
-                      isDark: isDark,
-                      workType: "AC indoor cleaning",
-                      location: "Near Rohini sector 21",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JobDetailsPage(
+                              jobTitle: "AC indoor cleaning",
+                              description: "Indoor AC unit cleaning and maintenance.",
+                              location: "Near Rohini sector 21",
+                              requester: "Shyam Singh",
+                              rating: "4.7",
+                            ),
+                          ),
+                        );
+                      },
+                      child: OngoingWorkCard(
+                        name: "Shyam Singh",
+                        rating: "4.7",
+                        time: "3.50 pm",
+                        date: "12-05-2025",
+                        isDark: isDark,
+                        workType: "AC indoor cleaning",
+                        location: "Near Rohini sector 21",
+                      ),
                     ),
                     const SizedBox(height: 12),
-                    OngoingWorkCard(
-                      name: "Suraj yadav",
-                      rating: "4.9",
-                      time: "1.15 pm",
-                      date: "12-05-2025",
-                      isDark: isDark,
-                      workType: "Fan repair",
-                      location: "Near India Gate ",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JobDetailsPage(
+                              jobTitle: "Fan repair",
+                              description: "Ceiling fan not working, needs repair.",
+                              location: "Near India Gate ",
+                              requester: "Suraj yadav",
+                              rating: "4.9",
+                            ),
+                          ),
+                        );
+                      },
+                      child: OngoingWorkCard(
+                        name: "Suraj yadav",
+                        rating: "4.9",
+                        time: "1.15 pm",
+                        date: "12-05-2025",
+                        isDark: isDark,
+                        workType: "Fan repair",
+                        location: "Near India Gate ",
+                      ),
                     ),
                     const SizedBox(height: 12),
-                    OngoingWorkCard(
-                      name: "Mohan lal",
-                      rating: "4.2",
-                      time: "7.20 pm",
-                      date: "12-05-2025",
-                      isDark: isDark,
-                      workType: "Fridge maintenance",
-                      location: "Pocket 11, Rohini",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JobDetailsPage(
+                              jobTitle: "Fridge maintenance",
+                              description: "Fridge cooling issue, requires maintenance.",
+                              location: "Pocket 11, Rohini",
+                              requester: "Mohan lal",
+                              rating: "4.2",
+                            ),
+                          ),
+                        );
+                      },
+                      child: OngoingWorkCard(
+                        name: "Mohan lal",
+                        rating: "4.2",
+                        time: "7.20 pm",
+                        date: "12-05-2025",
+                        isDark: isDark,
+                        workType: "Fridge maintenance",
+                        location: "Pocket 11, Rohini",
+                      ),
                     ),
                   ],
                 ),

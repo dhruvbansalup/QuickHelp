@@ -99,9 +99,9 @@ class ProfileServiceProviderPage extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center(
-        child: Text('Profile Service Provider Page'),
-      ),
+      // body: const Center(
+      //   child: Text('Profile Service Provider Page'),
+      // ),
     );
   }
 }

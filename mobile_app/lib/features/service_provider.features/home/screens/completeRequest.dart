@@ -3,7 +3,7 @@ import 'package:quick_help/utils/constants/appcolors.dart';
 import 'package:quick_help/utils/helpers/helper_functions.dart';
 
 class CompleteRequestPage extends StatelessWidget {
-  const CompleteRequestPage({Key? key}) : super(key: key);
+  const CompleteRequestPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ServiceProviderNotiPage extends StatelessWidget {
-  const ServiceProviderNotiPage({Key? key}) : super(key: key);
+  const ServiceProviderNotiPage({super.key});
 
   @override
   Widget build(BuildContext context) {

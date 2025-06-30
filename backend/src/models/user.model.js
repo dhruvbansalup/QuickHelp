@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
   isphoneverified: { type: Boolean, default: false },
   isemailverified: { type: Boolean, default: false },
   addresses: [AddressSchema],
-  profilePic: { type: String },
+  profilePic:
+  {
+    url: { type: String },
+    public_id: { type: String }
+  }, // Profile picture with URL and public ID
 }, {
   timestamps: true // Automatically manage createdAt and updatedAt fields
 });

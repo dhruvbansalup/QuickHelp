@@ -61,12 +61,24 @@ const blacklistToken= async (token) => {
 }
 
 
+const updateUser = async (userId, updateData) => {
+    if (!userId) {
+        throw new Error('User ID is required for update');
+    }
+
+    const user = await User.findByIdAndUpdate(userId, updateData, {
+        new: true,
+    });
+
+    return user;
+}
 
 // Exporting the service functions
 const userServices = {
     createUser,
     findUser,
     blacklistToken,
+    updateUser,
 };
 export default userServices;
 

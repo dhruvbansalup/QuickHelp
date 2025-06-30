@@ -24,8 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(delay, () {
       Navigator.pushReplacement(
         context,
-    //    MaterialPageRoute(builder: (context) => AccountTypeScreen()),
-      MaterialPageRoute(builder: (context) => ServiceProviderHome()),
+       MaterialPageRoute(builder: (context) => AccountTypeScreen()),
+      // MaterialPageRoute(builder: (context) => ServiceProviderHome()),
       );
     });
   }

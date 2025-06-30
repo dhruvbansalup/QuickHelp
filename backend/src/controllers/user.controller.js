@@ -1,6 +1,7 @@
 //Controller for user authentication and registration
 import userServices from "../services/user.service.js";
 import asyncErrorHandler from "../utils/asyncErrorHandler.js";
+import uploadFile from "../utils/upload.helper.js";
 
 
 const registerUser = asyncErrorHandler(async (req, res, next) => {
@@ -75,7 +76,39 @@ const doesEmailExists = asyncErrorHandler(async (req, res, next) => {
   }
 });
 
+// Controller for uploading profile pictures
+const uploadProfilePicture = asyncErrorHandler(async (req, res, next) => {
+  // uploadMiddleware should be applied to the route before this controller
+  // All file validations are already done in the middleware
+  
+  const userId = req.user.id; // Assuming have auth middleware that sets req.user
+  
+  // Upload file to cloudinary with custom folder
+  const uploadResult = await uploadFile(req, res, 'profile-pictures');
+  
+  if (!uploadResult.success) {
+    return res.status(500).json({
+      message: "Failed to upload profile picture",
+      error: uploadResult.error
+    });
+  }
 
+  // Update user profile with new image URL
+  const updatedUser = await userServices.updateUser(userId, {
+    profilePic: {
+      url: uploadResult.data.url,
+      public_id: uploadResult.data.public_id
+    }
+  });
+
+  res.status(200).json({
+    message: "Profile picture updated successfully",
+    data: {
+      user: updatedUser,
+      upload: uploadResult.data
+    }
+  });
+});
 
 // Exporting the controller functions
 const userControllers = {
@@ -84,6 +117,7 @@ const userControllers = {
   logoutUser,
   getUserProfile,
   doesEmailExists,
+  uploadProfilePicture, // Add the new upload method
 };
 
 export default userControllers;

@@ -8,7 +8,7 @@ dotenv.config();
 import app from './src/app.js';
 
 // Database Connection
-import connectDB from './src/config/db.js';
+import connectDB from './src/config/db.config.js';
 connectDB();
 
 //Get the port or use 5000 as default
